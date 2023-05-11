@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"os/signal"
 	"syscall"
 	"time"
@@ -13,7 +14,6 @@ import (
 	"github.com/nach9/go-todolist/pkg/activities"
 	"github.com/nach9/go-todolist/pkg/common/db"
 	"github.com/nach9/go-todolist/pkg/todos"
-	"github.com/spf13/viper"
 )
 
 func main() {
@@ -23,14 +23,11 @@ func main() {
 
 	appPort := "3030"
 
-	viper.SetConfigFile(".env")
-	viper.ReadInConfig()
-
-	dbName := viper.Get("MYSQL_DBNAME").(string)
-	dbUser := viper.Get("MYSQL_USER").(string)
-	dbPass := viper.Get("MYSQL_PASSWORD").(string)
-	dbHost := viper.Get("MYSQL_HOST").(string)
-	dbPort := viper.Get("MYSQL_PORT").(string)
+	dbName := os.Getenv("MYSQL_DBNAME")
+	dbUser := os.Getenv("MYSQL_USER")
+	dbPass := os.Getenv("MYSQL_PASSWORD")
+	dbHost := os.Getenv("MYSQL_HOST")
+	dbPort := os.Getenv("MYSQL_PORT")
 
 	dbUrl := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true", dbUser, dbPass, dbHost, dbPort, dbName)
 
