@@ -16,7 +16,7 @@ type activityRepo struct {
 	DB *gorm.DB
 }
 
-func NewActivityrepo(DB *gorm.DB) ActivityRepo {
+func NewActivityRepo(DB *gorm.DB) ActivityRepo {
 	return &activityRepo{DB}
 }
 

@@ -6,6 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/nach9/go-todolist/pkg/activities"
 	"github.com/nach9/go-todolist/pkg/common/db"
+	"github.com/nach9/go-todolist/pkg/todos"
 	"github.com/spf13/viper"
 )
 
@@ -25,6 +26,7 @@ func main() {
 	db := db.Init(dbUrl)
 
 	activities.RegisterRoutes(r, db)
+	todos.RegisterRoutes(r, db)
 
-	r.Run(":8080")
+	r.Run(":3030")
 }

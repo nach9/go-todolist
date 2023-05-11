@@ -15,6 +15,13 @@ type exceptionMessage struct {
 func exceptionNotFound(c *gin.Context, id int) {
 	c.AbortWithStatusJSON(http.StatusNotFound, exceptionMessage{
 		Status:  "Not Found",
+		Message: "Todo with ID " + strconv.Itoa(id) + " Not Found",
+	})
+}
+
+func exceptionActivityNotFound(c *gin.Context, id int) {
+	c.AbortWithStatusJSON(http.StatusNotFound, exceptionMessage{
+		Status:  "Not Found",
 		Message: "Activity with ID " + strconv.Itoa(id) + " Not Found",
 	})
 }

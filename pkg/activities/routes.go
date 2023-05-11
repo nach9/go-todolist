@@ -9,7 +9,7 @@ import (
 )
 
 func RegisterRoutes(r *gin.Engine, db *gorm.DB) {
-	activityRepo := repositoryActivity.NewActivityrepo(db)
+	activityRepo := repositoryActivity.NewActivityRepo(db)
 	activityService := serviceActivity.NewActivityService(activityRepo)
 	activityHandler := handlerActivity.NewActivityHandler(activityService)
 

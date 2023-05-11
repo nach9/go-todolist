@@ -29,6 +29,8 @@ func getErrorMsg(fe validator.FieldError) string {
 		return fmt.Sprintf("Must be longer than %s", param)
 	case "email":
 		return "Invalid email format"
+	case "boolean":
+		return "Invalid boolean value"
 	case "len":
 		return fmt.Sprintf("Must be %s characters long", param)
 	}
