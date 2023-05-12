@@ -10,6 +10,7 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/nach9/go-todolist/pkg/activities"
 	"github.com/nach9/go-todolist/pkg/common/db"
@@ -33,6 +34,8 @@ func main() {
 
 	r := gin.Default()
 	db := db.Init(dbUrl)
+
+	r.Use(cors.Default())
 
 	activities.RegisterRoutes(r, db)
 	todos.RegisterRoutes(r, db)
