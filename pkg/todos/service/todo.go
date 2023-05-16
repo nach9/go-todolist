@@ -1,8 +1,6 @@
 package serviceTodo
 
 import (
-	"errors"
-
 	repositoryActivity "github.com/nach9/go-todolist/pkg/activities/repository"
 	dtoTodo "github.com/nach9/go-todolist/pkg/todos/dto"
 	entityTodo "github.com/nach9/go-todolist/pkg/todos/entity"
@@ -35,11 +33,11 @@ func (s todoService) GetById(id int64) (entityTodo.Todo, error) {
 }
 
 func (s todoService) Create(body dtoTodo.CreateTodoBody) (entityTodo.Todo, error) {
-	_, err := s.repoAct.FindById(body.ActivityGroupID)
+	// _, err := s.repoAct.FindById(body.ActivityGroupID)
 
-	if err != nil {
-		return entityTodo.Todo{}, errors.New("Activity/Not-Found")
-	}
+	// if err != nil {
+	// 	return entityTodo.Todo{}, errors.New("Activity/Not-Found")
+	// }
 
 	newTodo := entityTodo.Todo{
 		ActivityGroupID: body.ActivityGroupID,

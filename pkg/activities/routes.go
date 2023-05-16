@@ -15,9 +15,9 @@ func RegisterRoutes(r *gin.Engine, db *gorm.DB) {
 
 	routes := r.Group("/activity-groups")
 
-	routes.GET("/", activityHandler.GetActivityList)
+	routes.GET("", activityHandler.GetActivityList)
 	routes.GET("/:id", activityHandler.GetActivityById)
 	routes.PATCH("/:id", activityHandler.UpdateActivity)
-	routes.POST("/", activityHandler.CreateActivity)
+	routes.POST("", activityHandler.CreateActivity)
 	routes.DELETE("/:id", activityHandler.DeleteActivity)
 }

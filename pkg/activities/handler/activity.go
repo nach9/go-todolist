@@ -60,7 +60,7 @@ func (h activityHandler) CreateActivity(c *gin.Context) {
 	var body dtoActivity.CreateActivityBody
 
 	if err := c.ShouldBind(&body); err != nil {
-		validation.ErrorValidation(err, c)
+		validation.ErrorValidation(err, c, body)
 		return
 	}
 
@@ -82,7 +82,7 @@ func (h activityHandler) UpdateActivity(c *gin.Context) {
 	var body dtoActivity.UpdateActivityBody
 
 	if err := c.ShouldBind(&body); err != nil {
-		validation.ErrorValidation(err, c)
+		validation.ErrorValidation(err, c, body)
 		return
 	}
 
@@ -108,16 +108,16 @@ func (h activityHandler) DeleteActivity(c *gin.Context) {
 	id := c.Param("id")
 	activityId, _ := strconv.Atoi(id)
 
-	deletedActivity, err := h.service.DeleteById(int64(activityId))
+	_, err := h.service.DeleteById(int64(activityId))
 
 	if err != nil {
 		exceptionNotFound(c, activityId)
 		return
 	}
 
-	c.JSON(http.StatusOK, dtoActivity.ActivityResponse{
+	c.JSON(http.StatusOK, dtoActivity.ActivityDeleteResponse{
 		Status:  "Success",
 		Message: "Success",
-		Data:    deletedActivity,
+		Data:    &dtoActivity.Blank{},
 	})
 }

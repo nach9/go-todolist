@@ -18,9 +18,9 @@ func RegisterRoutes(r *gin.Engine, db *gorm.DB) {
 
 	routes := r.Group("/todo-items")
 
-	routes.GET("/", todoHandler.GetTodoList)
+	routes.GET("", todoHandler.GetTodoList)
 	routes.GET("/:id", todoHandler.GetTodoById)
 	routes.PATCH("/:id", todoHandler.UpdateTodo)
-	routes.POST("/", todoHandler.CreateTodo)
+	routes.POST("", todoHandler.CreateTodo)
 	routes.DELETE("/:id", todoHandler.DeleteTodo)
 }
