@@ -50,7 +50,7 @@ func (h todoHandler) GetTodoList(c *gin.Context) {
 	var param dtoTodo.GetAllParam
 
 	if err := c.ShouldBind(&param); err != nil {
-		validation.ErrorValidation(err, c)
+		validation.ErrorValidation(err, c, param)
 		return
 	}
 
@@ -67,7 +67,7 @@ func (h todoHandler) CreateTodo(c *gin.Context) {
 	var body dtoTodo.CreateTodoBody
 
 	if err := c.ShouldBind(&body); err != nil {
-		validation.ErrorValidation(err, c)
+		validation.ErrorValidation(err, c, body)
 		return
 	}
 
@@ -94,7 +94,7 @@ func (h todoHandler) UpdateTodo(c *gin.Context) {
 	var body dtoTodo.UpdateTodoBody
 
 	if err := c.ShouldBind(&body); err != nil {
-		validation.ErrorValidation(err, c)
+		validation.ErrorValidation(err, c, body)
 		return
 	}
 
@@ -120,16 +120,16 @@ func (h todoHandler) DeleteTodo(c *gin.Context) {
 	id := c.Param("id")
 	todoId, _ := strconv.Atoi(id)
 
-	deletedTodo, err := h.service.DeleteById(int64(todoId))
+	_, err := h.service.DeleteById(int64(todoId))
 
 	if err != nil {
 		exceptionNotFound(c, todoId)
 		return
 	}
 
-	c.JSON(http.StatusOK, dtoTodo.TodoResponse{
+	c.JSON(http.StatusOK, dtoTodo.TodoDeleteResponse{
 		Status:  "Success",
 		Message: "Success",
-		Data:    deletedTodo,
+		Data:    &dtoTodo.Blank{},
 	})
 }
